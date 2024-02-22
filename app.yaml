@@ -1,0 +1,143 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  creationTimestamp: "2024-02-22T14:10:59Z"
+  generation: 450
+  name: pacman
+  namespace: argocd
+  resourceVersion: "40144"
+  uid: df6788cf-1072-4f25-8f5f-d5858c1df60e
+spec:
+  destination:
+    namespace: pacman-argo
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: .
+    repoURL: https://github.com/rpcrit/pacman
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ApplyOutOfSyncOnly=true
+status:
+  conditions:
+  - lastTransitionTime: "2024-02-22T14:11:00Z"
+    message: Resource apps/Deployment/pacman-argo/pacman appeared 2 times among application
+      resources.
+    type: RepeatedResourceWarning
+  controllerNamespace: argocd
+  health:
+    status: Healthy
+  history:
+  - deployStartedAt: "2024-02-22T14:21:46Z"
+    deployedAt: "2024-02-22T14:21:47Z"
+    id: 0
+    revision: d0061e0c2fac2e9d0906ec5f9ba720fd0bf46e8c
+    source:
+      path: .
+      repoURL: https://github.com/rpcrit/pacman
+      targetRevision: HEAD
+  - deployStartedAt: "2024-02-22T14:24:48Z"
+    deployedAt: "2024-02-22T14:24:48Z"
+    id: 1
+    revision: 102346c3a12db4cf1c1d38bfd6e14fde753c6941
+    source:
+      path: .
+      repoURL: https://github.com/rpcrit/pacman
+      targetRevision: HEAD
+  - deployStartedAt: "2024-02-22T14:25:34Z"
+    deployedAt: "2024-02-22T14:25:34Z"
+    id: 2
+    revision: 102346c3a12db4cf1c1d38bfd6e14fde753c6941
+    source:
+      path: .
+      repoURL: https://github.com/rpcrit/pacman
+      targetRevision: HEAD
+  - deployStartedAt: "2024-02-22T14:28:17Z"
+    deployedAt: "2024-02-22T14:28:18Z"
+    id: 3
+    revision: ea97ce0f32f5cc3592ac04fc84c99c7555f9ff5b
+    source:
+      path: .
+      repoURL: https://github.com/rpcrit/pacman
+      targetRevision: HEAD
+  operationState:
+    finishedAt: "2024-02-22T14:28:18Z"
+    message: successfully synced (all tasks run)
+    operation:
+      initiatedBy:
+        username: admin
+      retry: {}
+      sync:
+        prune: true
+        revision: ea97ce0f32f5cc3592ac04fc84c99c7555f9ff5b
+        syncOptions:
+        - CreateNamespace=true
+        - ApplyOutOfSyncOnly=true
+        - PruneLast=true
+        syncStrategy:
+          hook: {}
+    phase: Succeeded
+    startedAt: "2024-02-22T14:28:17Z"
+    syncResult:
+      resources:
+      - group: apps
+        hookPhase: Succeeded
+        kind: Deployment
+        message: pruned
+        name: hello
+        namespace: default
+        status: Pruned
+        syncPhase: Sync
+        version: v1
+      revision: ea97ce0f32f5cc3592ac04fc84c99c7555f9ff5b
+      source:
+        path: .
+        repoURL: https://github.com/rpcrit/pacman
+        targetRevision: HEAD
+  reconciledAt: "2024-02-22T14:28:23Z"
+  resources:
+  - health:
+      status: Healthy
+    kind: Service
+    name: pacman-service
+    namespace: pacman-argo
+    status: Synced
+    version: v1
+  - group: apps
+    health:
+      status: Healthy
+    kind: Deployment
+    name: pacman
+    namespace: pacman-argo
+    status: Synced
+    version: v1
+  - group: networking.k8s.io
+    health:
+      status: Healthy
+    kind: Ingress
+    name: pacman
+    namespace: pacman-argo
+    status: Synced
+    version: v1
+  sourceType: Directory
+  summary:
+    externalURLs:
+    - http://pacman.local/
+    images:
+    - ghcr.io/rpcrit/pacman:2.0
+  sync:
+    comparedTo:
+      destination:
+        namespace: pacman-argo
+        server: https://kubernetes.default.svc
+      source:
+        path: .
+        repoURL: https://github.com/rpcrit/pacman
+        targetRevision: HEAD
+    revision: ea97ce0f32f5cc3592ac04fc84c99c7555f9ff5b
+    status: Synced
