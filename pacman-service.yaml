@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: pacman-service
 spec:
-  selector:
-    app: pacman
+  type: ClusterIP
   ports:
     - protocol: TCP
-      port: 80
       targetPort: 80
-  type: LoadBalancer
+      port: 80
+  selector:
+      name: pacman
