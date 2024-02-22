@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pacman
+  labels:
+    app: pacman
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pacman
+  template:
+    metadata:
+      labels:
+        app: pacman
+    spec:
+      containers:
+      - name: pacman
+        image: ghcr.io/rpcrit/pacman:2.0
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "1m"
