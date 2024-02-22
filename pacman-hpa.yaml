@@ -1,17 +1,26 @@
-apiVersion: autoscaling/v1
-kind: HorizontalPodAutoscaler
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: pacman-hpa
+  labels:
+    app: hello
+  name: hello
+  namespace: default
 spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: pacman
-  minReplicas: 2
-  maxReplicas: 5
-  metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      targetAverageUtilization: 1
-
+  selector:
+    matchLabels:
+      app: hello
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: hello
+    spec:
+      containers:
+      - image: hashicorp/http-echo
+        name: http-echo
+        ports:
+        - containerPort: 5678
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 10m
